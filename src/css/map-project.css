@@ -1,0 +1,12 @@
+/* common elements */
+html, body, .wrapper {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+}
+
+/* map canvas */
+#map-canvas {
+    height: 100%;
+    width: 100%;
+}
