@@ -87,12 +87,25 @@ var Map = function(center, element) {
     return map;
 };
 
-var Brewery = function(brewery){
+var Brewery = function(brewery, map){
   var self = this;
       self.name = brewery.name;
       self.latitude = brewery.latitude;
       self.longitude = brewery.longitude;
       self.website = brewery.website;
+
+      self.breweryLocation = ko.computed(function(){
+        return new google.maps.LatLng(self.latitude, self.longitude);
+      });
+
+      self.mapMarker = (function(beer){
+          var breweryMarker;
+          breweryMarker = new google.maps.Marker({
+              position:beer.breweryLocation(),
+              map:map
+          });
+          return breweryMarker;
+      })(self);
 };
 
 var viewModel = function() {
@@ -138,7 +151,7 @@ var viewModel = function() {
 
     function populateBreweries(results){
         _.each(results, function(brewery){
-            self.breweryList.push(brewery.name);
+            self.breweryList.push(new Brewery(brewery, map));
         });
     }
 
