@@ -82,10 +82,8 @@ var Map = function(center, element) {
 
 var Brewery = function(brewery, map){
   var self = this;
-
       self.latitude = brewery.latitude;
       self.longitude = brewery.longitude;
-
       self.name = brewery.brewery.name;
       self.icon = _.pick(brewery.brewery.images, 'icon');
       self.description = brewery.brewery.description || '';
