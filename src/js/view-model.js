@@ -1,7 +1,4 @@
-
-
 var Map = function(center, element) {
-    var self = this;
     var roadAtlasStyles = [
         {
             "featureType": "road.highway",
@@ -70,20 +67,16 @@ var Map = function(center, element) {
         mapTypeControlOptions: {
             mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'BreweryLocator']
         },
-
         mapTypeControl: false,
         panControl: false,
         streetViewControl: false,
         zoomControl: false
     };
-
     map = new google.maps.Map(element, mapOptions);
-
     var styledMapOptions = {};
     var roadMapType = new google.maps.StyledMapType(roadAtlasStyles, styledMapOptions);
     map.mapTypes.set('BreweryLocator', roadMapType);
     map.setMapTypeId('BreweryLocator');
-
     return map;
 };
 
@@ -93,28 +86,57 @@ var Brewery = function(brewery, map){
       self.latitude = brewery.latitude;
       self.longitude = brewery.longitude;
       self.website = brewery.website;
+      self.breweries = ko.observableArray([]);
 
       self.breweryLocation = ko.computed(function(){
         return new google.maps.LatLng(self.latitude, self.longitude);
       });
 
       self.mapMarker = (function(beer){
-          var breweryMarker;
-          breweryMarker = new google.maps.Marker({
+          return new google.maps.Marker({
               position:beer.breweryLocation(),
               map:map
           });
-          return breweryMarker;
       })(self);
+
+    self.displayBrewery = function() {
+        var displayBreweryInfo = '<div class="info-window-content">' + '<span class="info-window-header">' + self.name + '</span>' + '<p>' + self.website + '</p>';
+        displayBreweryInfo += '<ul class="info-window-list">';
+        displayBreweryInfo += '<li>' + '<a href="' + self.website + '">' + self.name +'</a>' + '</li>';
+        displayBreweryInfo += '</ul>' + '</div>';
+        return displayBreweryInfo;
+    };
 };
 
 var viewModel = function() {
     var self = this,
         map,
         mapCanvas = $('#map-canvas')[0],
-        center = new google.maps.LatLng(40.4397, -79.9764);
-
+        mapInfoWindow = new google.maps.InfoWindow(),
+        center = new google.maps.LatLng(47.6097, -122.3331);
         self.breweryList = ko.observableArray([]);
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    
+    self.displayBreweryInformation = function(brewery) {
+        mapInfoWindow.setContent(brewery.displayBrewery());
+        mapInfoWindow.open(map, brewery.mapMarker);
+        map.panTo(brewery.mapMarker.position);
+        brewery.mapMarker.setAnimation(google.maps.Animation.BOUNCE);
+        stopNotSelectedAnimation(brewery);
+    };
+
+    self.closeWindowEvent = function(brewery){
+        brewery.mapMarker.setAnimation(null);
+    };
+
+    function stopNotSelectedAnimation(selectedBrewery){
+        self.breweryList().forEach(function(brewery) {
+            if (selectedBrewery != brewery) {
+                brewery.mapMarker.setAnimation(null);
+            }
+        });
+    }
 
     function initialize() {
         map = Map(center, mapCanvas);
@@ -132,8 +154,6 @@ var viewModel = function() {
     }
 
     function getBreweries(){
-        var results;
-
         $.ajax({
             type:"GET",
             async: true,
@@ -153,9 +173,21 @@ var viewModel = function() {
         _.each(results, function(brewery){
             self.breweryList.push(new Brewery(brewery, map));
         });
+        addClickEvents();
     }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+    function addClickEvents(){
+        self.breweryList().forEach(function(brewery){
+            google.maps.event.addListener(brewery.mapMarker, 'click', function () {
+                self.displayBreweryInformation(brewery);
+            });
+
+            google.maps.event.addListener(mapInfoWindow,'closeclick',function(){
+                self.closeWindowEvent(brewery);
+            });
+            
+        });
+    }
 };
 
 ko.applyBindings(new viewModel());
