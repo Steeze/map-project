@@ -10,3 +10,11 @@ html, body, .wrapper {
     height: 100%;
     width: 100%;
 }
+
+.info-window-content {
+    width: 250px;
+}
+
+.info-window-header {
+    font-weight: bold;
+}

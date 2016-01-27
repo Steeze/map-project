@@ -38,9 +38,8 @@ app.use(function(req, res, next) {
     }
 });
 
-
 app.get('/api', function(req, res){
-    request('https://api.brewerydb.com/v2/locations?key=' + API_KEY + '&locality=Seattle', function (error, response, body) {
+    request('https://api.brewerydb.com/v2/locations?key=' + API_KEY + '&locality=Pittsburgh', function (error, response, body) {
         if (!error && response.statusCode === 200) {
             console.log(body);
             res.send(body);
