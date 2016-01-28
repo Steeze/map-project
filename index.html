@@ -23,7 +23,7 @@
 <div class="container-fluid" id="main">
     <div class="row">
         <div class="col-xs-2" id="left">
-            <h3>Select A Brewery</h3>
+            <h4>Select A Brewery</h4>
             <hr/>
             <ul class="list-unstyled" data-bind="foreach: {data: breweryList, as: 'brewery'}" id="results-list">
                 <li data-bind="click: $root.displayBreweryInformation"> <img data-bind="attr:{src: brewery.icon.icon}"/>  <span data-bind="text: brewery.name"></span></li>

@@ -190,6 +190,13 @@ var viewModel = function() {
         _.each(results, function(brewery){
             self.breweryList.push(new Brewery(extractData(brewery), map));
         });
+
+        self.breweryList.sort(function(a,b){
+            if(a.name < b.name) return -1;
+            if(a.name > b.name) return 1;
+            return 0;
+        });
+
         addClickEvents();
     }
 
