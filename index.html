@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Community Map Project</title>
+    <title>Brewery Finder Pittsburgh</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="src/css/map-project.css" />
     <link rel="stylesheet" href="node_modules/toastr/build/toastr.css"/>
@@ -11,25 +11,22 @@
 </head>
 <body>
 <div class="navbar navbar-custom navbar-fixed-top">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">Brewery Finder Pittsburgh</a>
-        <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </a>
-        <form class="navbar-form navbar-left" data-bind="submit: searchList" role="search">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="navbar-brand" href="#">Brewery Finder Pittsburgh</div>
+        </div>
+        <form class="navbar-form navbar-right" data-bind="submit: searchList" role="search">
             <div class="form-group">
                 <input type="text" data-bind="value: query" class="form-control" placeholder="Search">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
-    </div>
+     </div>
 </div>
 <div class="container-fluid">
     <div class="row"><br/></div>
     <div class="row">
-        <div class="col-sm-2" >
+        <div class="col-sm-3" >
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="list-group nav" data-bind="foreach: {data: filterBreweryList, as: 'brewery'}" id="results-list">
@@ -43,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-10" id="mapContainer">
+        <div class="col-sm-9" id="mapContainer">
             <div class="panel panel-default">
                 <div class="panel-body text-center">
                     <div id="map-canvas" class="map" ></div>
