@@ -11,30 +11,45 @@
 </head>
 <body>
 <div class="navbar navbar-custom navbar-fixed-top">
-    <div class="navbar-header"><a class="navbar-brand" href="#">Brewery Finder Pittsburgh</a>
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Brewery Finder Pittsburgh</a>
         <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
+        <form class="navbar-form navbar-left" data-bind="submit: searchList" role="search">
+            <div class="form-group">
+                <input type="text" data-bind="value: query" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
     </div>
 </div>
-<div id="map-canvas"></div>
-<div class="container-fluid" id="main">
+<div class="container-fluid">
+    <div class="row"><br/></div>
     <div class="row">
-        <div class="col-xs-2" id="left">
-            <h4>Select A Brewery</h4>
-            <hr/>
-            <ul class="list-unstyled" data-bind="foreach: {data: breweryList, as: 'brewery'}" id="results-list">
-                <li data-bind="click: $root.displayBreweryInformation"> <img data-bind="attr:{src: brewery.icon.icon}"/>  <span data-bind="text: brewery.name"></span></li>
-                <hr/>
-            </ul>
-            <ul class="list-unstyled">
-                <li><img width="250px" height="80px" src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" /></li>
-            </ul>
+        <div class="col-sm-2" >
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="list-group nav" data-bind="foreach: {data: filterBreweryList, as: 'brewery'}" id="results-list">
+                        <li class="list-group-item" data-bind="click: $root.displayBreweryInformation">
+                            <img data-bind="attr:{src: brewery.icon.icon}"/> <br class="visible-sm visible-md">  <span data-bind="text: brewery.name"></span>
+                        </li>
+                    </ul>
+                    <ul class="list-unstyled text-center">
+                        <li><img width="220px" height="80px" src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" /></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="col-xs-10"></div>
-
+        <div class="col-sm-10" id="mapContainer">
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                    <div id="map-canvas" class="map" ></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="node_modules/jquery/dist/jquery.js" type="text/javascript"></script>
@@ -43,5 +58,7 @@
 <script src="node_modules/toastr/build/toastr.min.js" type="text/javascript"></script>
 <script src="node_modules/underscore/underscore.js" type="text/javascript"></script>
 <script src="src/js/view-model.js" type="text/javascript"></script>
+<script src="src/js/map-model.js" type="text/javascript"></script>
+<script src="src/js/brewery-model.js" type="text/javascript"></script>
 </body>
 </html>
