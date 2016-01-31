@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Brewery Finder Pittsburgh</title>
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="src/css/map-project.css" />
-    <link rel="stylesheet" href="node_modules/toastr/build/toastr.css"/>
+    <!-- @if NODE_ENV='production' -->
+    <link rel="stylesheet" href="css/all.css"/>
+    <!-- @endif -->
+    <!-- @if NODE_ENV !='production' -->
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="css/map-project.css" />
+    <link rel="stylesheet" href="../node_modules/toastr/build/toastr.css"/>
+    <!-- @endif -->
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtdBiR4WD0-DWQ27wsVX2tPNKkCSpGguU&libraries=places"></script>
 </head>
 <body>
@@ -49,13 +55,20 @@
         </div>
     </div>
 </div>
-<script src="node_modules/jquery/dist/jquery.js" type="text/javascript"></script>
-<script src="node_modules/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
-<script src="node_modules/knockout/build/output/knockout-latest.js" type="text/javascript"></script>
-<script src="node_modules/toastr/build/toastr.min.js" type="text/javascript"></script>
-<script src="node_modules/underscore/underscore.js" type="text/javascript"></script>
-<script src="src/js/view-model.js" type="text/javascript"></script>
-<script src="src/js/map-model.js" type="text/javascript"></script>
-<script src="src/js/brewery-model.js" type="text/javascript"></script>
+
+<!-- @if NODE_ENV='production' -->
+<script type="text/javascript" src="js/all.min.js"></script>
+<!-- @endif -->
+<!-- @if NODE_ENV !='production' -->
+<script src="../node_modules/jquery/dist/jquery.js" type="text/javascript"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
+<script src="../node_modules/knockout/build/output/knockout-latest.js" type="text/javascript"></script>
+<script src="../node_modules/toastr/build/toastr.min.js" type="text/javascript"></script>
+<script src="../node_modules/underscore/underscore.js" type="text/javascript"></script>
+<script src="js/view-model.js" type="text/javascript"></script>
+<script src="js/map-model.js" type="text/javascript"></script>
+<script src="js/brewery-model.js" type="text/javascript"></script>
+<!-- @endif -->
+
 </body>
 </html>

@@ -19,9 +19,7 @@ var viewModel = function() {
     };
 
     self.query = ko.observable('');
-
     self.searchList = function() {};
-
     self.closeWindowEvent = function(brewery){
         brewery.mapMarker.setAnimation(null);
     };
@@ -75,7 +73,7 @@ var viewModel = function() {
 
     function displayWelcomeMsg(){
         if (typeof google.maps !== 'object') {
-            toastr.error('Could not load Google Maps :/')
+            toastr.error('Could not load Google Maps :/');
         }
         else{
             toastr.info('Search or click on a brewery to learn more about that brewery.', 'Welcome to the brewery finder!');
