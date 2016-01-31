@@ -1,14 +1,24 @@
+/**
+ * View Model
+ */
 var viewModel = function() {
-    var self = this,
-        map,
-        mapCanvas = $('#map-canvas')[0],
-        mapInfoWindow = new google.maps.InfoWindow({
-            maxWidth:350
-        }),
-        center = new google.maps.LatLng(40.4397, -79.9764);
-        self.breweryList = ko.observableArray([]);
 
-        google.maps.event.addDomListener(window, 'load', initialize);
+    /** Set a pointer reference to 'this' */
+    var self = this;
+
+    var map;
+
+    var mapCanvas = $('#map-canvas')[0];
+
+    var mapInfoWindow = new google.maps.InfoWindow({
+            maxWidth:350
+        });
+
+    var center = new google.maps.LatLng(40.4397, -79.9764);
+
+    self.breweryList = ko.observableArray([]);
+
+    google.maps.event.addDomListener(window, 'load', initialize);
 
     self.displayBreweryInformation = function(brewery) {
         mapInfoWindow.setContent(brewery.displayBrewery());
@@ -129,4 +139,7 @@ var viewModel = function() {
 
 };
 
+/**
+ * Knockout Bindings
+ */
 ko.applyBindings(new viewModel());
