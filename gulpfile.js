@@ -1,4 +1,3 @@
-// Include gulp
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
@@ -25,7 +24,6 @@ var requiredCssFile = [
     'src/css/map-project.css'
 ];
 
-// Lint Task
 gulp.task('lint', function() {
     return gulp.src('src/js/**/*.js')
         .pipe(jshint())
@@ -39,7 +37,6 @@ gulp.task('css', function() {
         .pipe(gulp.dest('dist/css/'));
 });
 
-// Concatenate & Minify JS
 gulp.task('scripts', function() {
     return gulp.src(requiredJsFiles)
         .pipe(concat('all.js'))
@@ -51,7 +48,7 @@ gulp.task('scripts', function() {
 
 gulp.task('html', function() {
     gulp.src('src/*.html')
-        .pipe(preprocess({context: { NODE_ENV: 'production', DEBUG: true}})) //To set environment variables in-line
+        .pipe(preprocess({context: { NODE_ENV: 'production', DEBUG: true}}))
         .pipe(gulp.dest('dist/'))
 });
 
@@ -65,11 +62,9 @@ gulp.task('open', function() {
         }));
 });
 
-// Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('src/js/*.js', ['lint', 'scripts']);
 });
 
-// Default Task
 gulp.task('default', ['lint','html', 'css', 'scripts','open', 'watch']);
 
