@@ -1,5 +1,7 @@
-//https://medium.com/@victorleungtw/setup-proxy-server-with-express-827b6e69211f#.bmaxyq1hs
-
+/**
+ * Proxy Server
+ * https://medium.com/@victorleungtw/setup-proxy-server-with-express-827b6e69211f#.bmaxyq1hs
+ */
 var express = require('express');
 var request = require('request');
 var app = express();
@@ -37,7 +39,9 @@ app.use(function(req, res, next) {
         next();
     }
 });
-
+/**
+ * API call to BreweryDB
+ */
 app.get('/api', function(req, res){
     request('https://api.brewerydb.com/v2/locations?key=' + API_KEY + '&locality=Pittsburgh', function (error, response, body) {
         if (!error && response.statusCode === 200) {
