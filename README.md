@@ -15,7 +15,7 @@
     - Run the command "npm install"
     - An ExpressJs API will need to be started by opening  either a terminal or command prompt and navigating to where you cloned the project.
     - Then change directory to the api folder and type `node server.js`
-    - Open a second terminal or command prompt and navigate to where you cloned the project.
+    - Open a second terminal (command + N) or command prompt and navigate to where you cloned the project.
     - Type "gulp" this will generate a 'dist' folder and copy needed files, then it will open your default browser to the brewery finder.
 
 ##Project Structure
