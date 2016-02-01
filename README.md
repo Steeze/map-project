@@ -21,14 +21,14 @@
 ##File Structure
 
 ######src/
-#######css/
-#######js/
-#######index.html
+######css/
+######js/
+######index.html
 - Contains development files for the application.
 
 ######dist/
-#######css/
-#######js/
-#######index.html
+######css/
+######js/
+######index.html
 - This dist folder is created after the 'gulp' task is run.
 - This folder will contain the production ready minified CSS, JavaScript and HTML
