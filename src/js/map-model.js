@@ -1,4 +1,17 @@
+/**
+ * Google Map data model
+ * @param center passed in from the view model
+ * @param element passed in from the view model
+ * @returns {boolean|*}
+ * @constructor
+ * http://stackoverflow.com/questions/25147716/how-to-add-a-google-map-marker
+ */
 var MapModel = function(center, element) {
+    /**
+     * Parameter to hold map styling options.
+     * @type {*[]}
+     * http://stackoverflow.com/questions/25147716/how-to-add-a-google-map-marker
+     */
     var roadAtlasStyles = [
         {
             "featureType": "road.highway",
@@ -61,6 +74,10 @@ var MapModel = function(center, element) {
         }
     ];
 
+    /**
+     * Setting the initial Google map options.
+     * @type {{zoom: number, center: *, mapTypeControlOptions: {mapTypeIds: string[]}, mapTypeControl: boolean, panControl: boolean, streetViewControl: boolean, zoomControl: boolean}}
+     */
     var mapOptions = {
         zoom: 14,
         center: center,
@@ -72,10 +89,33 @@ var MapModel = function(center, element) {
         streetViewControl: false,
         zoomControl: false
     };
-    map = new google.maps.Map(element, mapOptions);
-    var styledMapOptions = {};
-    var roadMapType = new google.maps.StyledMapType(roadAtlasStyles, styledMapOptions);
+
+    /**
+     * Google map instance.
+     * @type {boolean}
+     */
+    var map = new google.maps.Map(element, mapOptions);
+
+    /**
+     * Parameter to hold the customize of the Google base map
+     * @type {google.maps.StyledMapType}
+     * https://developers.google.com/maps/documentation/javascript/styling?hl=en
+     */
+    var roadMapType = new google.maps.StyledMapType(roadAtlasStyles, {});
+
+    /**
+     * MapType object to hold information about the map
+     * https://developers.google.com/maps/documentation/javascript/maptypes?hl=en
+     */
     map.mapTypes.set('BreweryLocator', roadMapType);
+
+    /**
+     *Changes the kind of map to display
+     */
     map.setMapTypeId('BreweryLocator');
+
+    /**
+     * Returns the configure Google Map instance.
+     */
     return map;
 };
