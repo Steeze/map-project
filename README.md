@@ -18,7 +18,7 @@
     - Open a second terminal or command prompt and navigate to where you cloned the project.
     - Type "gulp" this will generate a 'dist' folder and copy needed files, then it will open your default browser to the brewery finder.
 
-##File Structure
+##Project Structure
 
 ######src/
 ######css/
