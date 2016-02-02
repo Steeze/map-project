@@ -38,11 +38,6 @@ var viewModel = function() {
     self.breweryList = ko.observableArray([]);
 
     /**
-     * Adding a listener to the window object. As soon as the load event occurs it executes the initialize function.
-     */
-    //google.maps.event.addDomListener(window, 'load', self.initialize);
-
-    /**
      * Click event on the map markers to display information about the brewery.
      * @param brewery
      */
@@ -58,11 +53,6 @@ var viewModel = function() {
      * Input search value for filtering the list of breweries
      */
     self.searchString = ko.observable('');
-
-    /**
-     * Empty function for form submit.
-     */
-    self.searchList = function() {};
 
     /**
      * Event captured from closing the map information window.
@@ -143,12 +133,7 @@ var viewModel = function() {
      * Function used to make sure the Google maps was loaded and display a welcome message.
      */
     function displayWelcomeMsg(){
-        if (typeof google.maps !== 'object') {
-            toastr.error('Could not load Google Maps :/');
-        }
-        else{
-            toastr.info('Search or click on a brewery to learn more about that brewery.', 'Welcome to the brewery finder!');
-        }
+        toastr.info('Search or click on a brewery to learn more about that brewery.', 'Welcome to the brewery finder!');
     }
 
     /**
