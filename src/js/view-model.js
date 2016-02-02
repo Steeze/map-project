@@ -40,7 +40,7 @@ var viewModel = function() {
     /**
      * Adding a listener to the window object. As soon as the load event occurs it executes the initialize function.
      */
-    google.maps.event.addDomListener(window, 'load', initialize);
+    //google.maps.event.addDomListener(window, 'load', self.initialize);
 
     /**
      * Click event on the map markers to display information about the brewery.
@@ -133,11 +133,11 @@ var viewModel = function() {
     /**
      * Function to initialize the application. This function is called when the load event occurs.
      */
-    function initialize() {
+    self.initialize = function() {
         map = MapModel(center, mapCanvas);
         displayWelcomeMsg();
         getBreweries();
-    }
+    };
 
     /**
      * Function used to make sure the Google maps was loaded and display a welcome message.
@@ -217,6 +217,18 @@ var viewModel = function() {
 };
 
 /**
+ * Callback functions after google maps loads.
  * Knockout Bindings
  */
-ko.applyBindings(new viewModel());
+function initMap(){
+    var vm = new viewModel();
+    ko.applyBindings(vm);
+    vm.initialize();
+}
+
+/**
+ * OnError function used if internet connection is lost loading google maps.
+ */
+function googleError() {
+    toastr.error('Could not load Google Maps :/');
+}
