@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Brewery Finder Pittsburgh</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.grey-amber.min.css" />
+
     <!-- @if NODE_ENV='production' -->
     <link rel="stylesheet" href="css/all.css"/>
     <!-- @endif -->
     <!-- @if NODE_ENV !='production' -->
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="css/map-project.css" />
     <link rel="stylesheet" href="../node_modules/toastr/build/toastr.css"/>
     <!-- @endif -->
@@ -20,44 +22,40 @@
     </script>
 </head>
 <body>
-<div class="navbar navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <div class="navbar-brand" href="#">Brewery Finder Pittsburgh</div>
-        </div>
-        <form class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-                <label for="search">Search for a Brewery :</label>
-                <input id="search" type="text" data-bind="value: searchString, valueUpdate: ['afterkeydown', 'input']" class="form-control" placeholder="Search">
-            </div>
-        </form>
-     </div>
-</div>
-<div class="container-fluid">
-    <div class="row"><br/></div>
-    <div class="row">
-        <div class="col-sm-3" >
-            <div class="row">
-                <div class="col-sm-12">
-                    <ul class="list-group nav" data-bind="foreach: {data: filterBreweryList, as: 'brewery'}" id="results-list">
-                        <li class="list-group-item" data-bind="click: $root.displayBreweryInformation">
-                            <img data-bind="attr:{src: brewery.icon.icon}"/> <br class="visible-sm visible-md">  <span data-bind="text: brewery.name"></span>
-                        </li>
-                    </ul>
-                    <ul class="list-unstyled text-center">
-                        <li><img width="220px" height="80px" src="http://s3.amazonaws.com/brewerydb/Powered-By-BreweryDB.png" /></li>
-                    </ul>
+<div class="wrapper">
+
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <div class="mdl-layout-spacer"></div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+                <label class="mdl-button mdl-js-button mdl-button--icon"
+                       for="fixed-header-drawer-exp">
+                    <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" name="sample" data-bind="value: searchString, valueUpdate: ['afterkeydown', 'input']" id="fixed-header-drawer-exp">
                 </div>
             </div>
         </div>
-        <div class="col-sm-9" id="mapContainer">
-            <div class="panel panel-default">
-                <div class="panel-body text-center">
-                    <div id="map" class="map" ></div>
-                </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Brewery Finder</span>
+        <nav class="mdl-navigation">
+            <span data-bind="foreach: {data: filterBreweryList, as: 'brewery'}">
+            <div data-bind="click: $root.displayBreweryInformation" class="mdl-navigation__link" id="clickme">
+                <span data-bind="text: brewery.name" ></span>
             </div>
-        </div>
+            </span>
+
+        </nav>
     </div>
+    <main class="mdl-layout__content">
+        <div id="map"></div>
+    </main>
+</div>
 </div>
 
 <!-- @if NODE_ENV='production' -->
@@ -67,6 +65,7 @@
 <script src="../node_modules/jquery/dist/jquery.js"></script>
 <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="../node_modules/knockout/build/output/knockout-latest.js"></script>
+<script src="../node_modules/material-design-lite/material.js"></script>
 <script src="../node_modules/toastr/build/toastr.min.js"></script>
 <script src="../node_modules/underscore/underscore.js"></script>
 <script src="js/view-model.js"></script>

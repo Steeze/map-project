@@ -9,8 +9,8 @@ var server = require('gulp-server-livereload');
 
 var requiredJsFiles = [
     'node_modules/jquery/dist/jquery.js',
-    'node_modules/bootstrap/dist/js/bootstrap.js',
     'node_modules/knockout/build/output/knockout-latest.js',
+    'node_modules/material-design-lite/dist/material.js',
     'node_modules/toastr/toastr.js',
     'node_modules/underscore/underscore.js',
     'src/js/view-model.js',
@@ -20,7 +20,6 @@ var requiredJsFiles = [
 
 var requiredCssFile = [
     'node_modules/toastr/build/toastr.css',
-    'node_modules/bootstrap/dist/css/bootstrap.css',
     'src/css/map-project.css'
 ];
 

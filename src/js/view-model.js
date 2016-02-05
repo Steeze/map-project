@@ -210,7 +210,6 @@ function initMap(){
     ko.applyBindings(vm);
     vm.initialize();
 }
-
 /**
  * OnError function used if internet connection is lost loading google maps.
  */
