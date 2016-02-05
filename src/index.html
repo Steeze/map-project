@@ -15,11 +15,6 @@
     <link rel="stylesheet" href="../node_modules/toastr/build/toastr.css"/>
     <!-- @endif -->
 
-    <script async
-            defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtdBiR4WD0-DWQ27wsVX2tPNKkCSpGguU&libraries=places&callback=initMap"
-            onerror="googleError()">
-    </script>
 </head>
 <body>
 <div class="wrapper">
@@ -72,6 +67,11 @@
 <script src="js/map-model.js"></script>
 <script src="js/brewery-model.js"></script>
 <!-- @endif -->
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtdBiR4WD0-DWQ27wsVX2tPNKkCSpGguU&libraries=places&callback=initMap"
+        onerror="googleError()">
+</script>
 
 </body>
 </html>
